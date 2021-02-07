@@ -2,6 +2,8 @@
 
 Author: Sawyer Herbst
 
+Version: 0.1.0
+
 # 0. Preface
 
 This document specifies the Malabar protocol, a decentralized, low-latency communication protocol.
@@ -87,30 +89,31 @@ This document also will not provide an implementation of the Malabar protocol.
 
 ## 1.5. Terminology
 
-| Term           | Definition                                                                                                              |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Node           | Any client that supports the Malabar protocol                                                                           |
-| Network        | A group of interconnected nodes supporting the Malabar protocol                                                         |
-| Peer           | A node that is directly connected to a given node                                                                       |
-| Request        | Any communication defined by the Malabar protocol that is made between two nodes                                        |
-| Transaction    | A combination of requests made between nodes in order to send a message from one Ethereum address to another            |
-| Sender         | The node that initiates the transaction to send a message                                                               |
-| Recipient      | The node that the sender wishes to send the message to                                                                  |
-| Transport node | Any node other than the sender or reciever that engages in the transportation of a message                              |
-| Sharding       | The method in which the network is subdivided into "shards" in order to scale to a large number of concurrent messages. |
+| Term           | Definition                                                   |
+| -------------- | ------------------------------------------------------------ |
+| Node           | Any client that supports the Malabar protocol                |
+| Network        | A group of interconnected nodes supporting the Malabar protocol |
+| Peer           | A node that is directly connected to a given node            |
+| Request        | Any communication defined by the Malabar protocol that is made between two nodes |
+| Transaction    | A combination of requests made between nodes in order to send a message from one Ethereum address to another |
+| Sender         | The node that initiates the transaction to send a message    |
+| Recipient      | The node that the sender wishes to send the message to       |
+| Transport node | Any node other than the sender or reciever that engages in the transportation of a message |
 
 # 2. Network
 
 This section describes how nodes discover and connect to each other, forming a network of nodes.
-This section also introduces the underlying wire protocol, Libp2p. This section does not describe
-what sharding is, or how it works (described in section 4).
+This section also introduces the underlying wire protocol, Libp2p.
 
 # 3. Transactions
 
 This section describes the steps that the sender, recipient, and transport nodes must undertake in
 order to send a message through the Malabar protocol.
 
-# 4. Sharding
+# 4. Future Work
 
-This section describes how the network is subdivided into shards in order to scale to large number
-of concurrent messages.
+This section describes potential future work that would improve the Malabar protocol.
+
+## 4.1. Sharding
+
+The current version of this specification assumes that there is no network subdivision. This means that a single message transaction would result in requests being made to every node in the network. This is not suitable to scale to a large number of concurrent transactions. A potential fix to this issue is "sharding". Sharding is where the network is subdivided such that there are many sub-networks, or "shards", as part of the Malabar network.
