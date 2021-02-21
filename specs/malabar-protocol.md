@@ -45,7 +45,7 @@ Version: 0.2.0
 
 # 0. Preface
 
-This document specifies the Malabar protocol, a decentralized, low-latency communication protocol
+This document specifies the Malabar protocol: a decentralized, low-latency communication protocol
 for use in the Ethereum ecosystem.
 
 ## 0.1. Key Words
@@ -59,28 +59,27 @@ when, and only when, they appear in all capitals, as shown here.
 ## 0.2. Scope
 
 This document is the specification of the Malabar protcol. It describes how peers discover other
-peers, connect, and send and transport messages. A developer should be able to implement a Malabar
-protocol-compliant peer by reading this specification alone.
+peers, connect, send, and transport messages.
 
 ## 0.3. Out of Scope
 
-This document does not explain the workings of the currency used to pay fees on the Malabar network.
+This document does not explain or specify the currency used to pay fees on the Malabar network.
 
 ## 0.4. Terminology
 
 The following terms are used throughout this specification
 
-| Term               | Definition                                                                                 |
-| ------------------ | ------------------------------------------------------------------------------------------ |
-| Peer               | A computer that is running the Malabar protocol and connected to the Malabar network       |
-| Direct Peer        | A peer that is directly connected to a given peer                                          |
-| Network            | A group of interconnected peers supporting the Malabar protocol                            |
-| Communication      | Any communication defined by the Malabar protocol that is made between two peers           |
-| Message            | An umbrella term describing                                                                |
-| Sender             | The peer that initiates the message                                                        |
-| Recipient          | The peer that the sender wishes to send the message to                                     |
-| Transport peer     | Any peer other than the sender or reciever that engages in the transportation of a message |
-| Peer-to-peer (p2p) | Communication directly between peers; not through a centralized service                    |
+| Term               | Definition                                                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| Peer               | A computer that is running the Malabar protocol and connected to the Malabar network                                     |
+| Direct Peer        | A peer that is directly connected to a given peer                                                                        |
+| Network            | A group of interconnected peers supporting the Malabar protocol                                                          |
+| Communication      | Any transmission defined by the Malabar protocol that is made between two peers                                          |
+| Message            | An umbrella term describing the data and the communications and actions taken to send that data, in the Malabar network. |
+| Sender             | The originating peer of a message                                                                                        |
+| Recipient          | The peer that the sender wishes to send the message to                                                                   |
+| Transport peer     | Any peer other than the sender or reciever that engages in the transportation of a message                               |
+| Peer-to-peer (p2p) | Communication directly between peers; not through a centralized service                                                  |
 
 ## 0.5. Versioning
 
@@ -102,16 +101,17 @@ now there are three main ways to achieve this. The first is to use a centralized
 facilitate communication between users. This works fine for some apps, but it means that the
 successful functioning of the app is under the control of the developer, and possibly the
 government. The second option is to design and implement a p2p network solely for your application.
-This is simply not possible for most developers, and provides a lesser level of security. The third
-and final option is to use an existing general-purpose decentralized messaging protocol.
+This is simply not possible for most developers, and likely won't reach the same levels of
+reliability and security as a standalone project. The third and final option is to use an existing
+general-purpose decentralized messaging protocol.
 
 Existing decentralized messaging protocols exist, but are flawed in ways that make them unusable in
 production dApps. Perhaps the most notable decentralized messenging protocol is Whisper. Whisper is
 a part of the Ethereum protocol suite and is included in Geth. In its current state, Whisper is not
-incentived and has to be manually enabled in Geth, and as such the protocol is more esoteric than
-practical. In addition, its lack of network sharding means that it is not scalable to a large
-message volume. Other protocols do exist (see: Waku), but are lacking many features that make them
-not feasible for production dApps.
+incentived and has to be manually enabled in Geth, and as such the protocol is not practical. In
+addition, its lack of network sharding means that it is not scalable to a large message volume.
+Other protocols do exist (see: Waku), but are lacking many features that make them not feasible for
+production dApps.
 
 The Malabar protocol intends to fix many of these issues and provide a better alternative to
 existing options.
@@ -130,7 +130,7 @@ example, censorship by a government).
 ### 1.2.2. Dark
 
 Peers send and receive messages through their Ethereum addresses. Despite this, the IP address of a
-peer should not be associable to a matching Ethereum address.
+peer should not be associable to the corresponding Ethereum address.
 
 ### 1.2.3. Self-Sustaining
 
@@ -161,9 +161,8 @@ that is useful in a p2p network (such as [Kademlia](https://en.wikipedia.org/wik
 
 ## 2.2. Transports
 
-A peer MUST support TCP and WebSocket as the underlying transports. The reason WebSocket must be
-supported is because browsers can't make p2p requests over TCP. In addition, a peer MAY support any
-number of additional transports.
+A peer MUST support TCP as the underlying transport. In addition, a peer MAY support any number of
+additional transports.
 
 ## 2.3. Ambient Discovery
 
